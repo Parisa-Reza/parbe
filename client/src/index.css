@@ -4,3 +4,16 @@
 body {
   font-family: "Playpen Sans", cursive;
 }
+
+.input-box {
+    @apply w-full flex justify-between gap-3 text-sm text-black bg-gray-50/50 rounded px-4 py-3 mb-4 mt-3 border border-gray-300 outline-none focus-within:border-[#670D2F];
+}
+
+
+.btn-primary {
+    @apply w-full flex items-center justify-center gap-3 text-sm font-medium text-white bg-[#670D2F] shadow-lg shadow-[#FFEEF4] p-[10px] rounded-md my-1 hover:bg-[#F7CFD8] hover:text-black cursor-pointer;
+}
+
+.btn-small {
+    @apply flex items-center justify-center gap-3 bg-linear-to-r from-[#7D1C4A] to-[#670D2F] text-sm font-semibold text-white px-7 py-2 rounded-lg hover:bg-black hover:text-white cursor-pointer hover:shadow-2xl hover:shadow-[#FFEEF4];
+}
