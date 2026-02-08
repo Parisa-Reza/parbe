@@ -1,1 +1,1 @@
-export * from './AppRouter.jsx';
+export {AppRouter} from './AppRouter.jsx';

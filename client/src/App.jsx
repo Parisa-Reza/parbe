@@ -1,12 +1,11 @@
 import { AppRouter } from './router'
 import { Toaster } from 'react-hot-toast';
 
-function App() {
+export const App=()=> {
 
 
   return (
     <>
-      <div className='text-3xl'>Parbe</div>
       <AppRouter/>
       <Toaster
       toastOptions={{
@@ -20,4 +19,4 @@ function App() {
   )
 }
 
-export default App
+

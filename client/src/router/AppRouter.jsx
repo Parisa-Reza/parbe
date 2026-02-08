@@ -26,7 +26,6 @@ const router = createBrowserRouter([
 
 ]);
 
-const root = document.getElementById("root");
 
 export const AppRouter = () => {
   return <RouterProvider router={router} />;
