@@ -1,0 +1,20 @@
+const mongoose = require("mongoose");
+
+const QuestionSchema = new mongoose.Schema(
+  {
+    session: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Session",
+    },
+    question: String,
+    answer: String,
+    notes: String,
+    isPinned: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true },
+);
+
+module.exports = mongoose.Model("Question", QuestionSchema);
