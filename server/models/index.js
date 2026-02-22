@@ -1,3 +1,3 @@
-export * from "./Question.js"
-export * from "./Session.js"
-export * from "./User.js"
+export { default as Question } from "./Question.js"
+export { default as Session } from "./Session.js"
+export { default as User } from "./User.js"

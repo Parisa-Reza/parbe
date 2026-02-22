@@ -6,7 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import connectDB from "./config/db.js";
-import authRoutes from "./routes/authRoutes.js"; 
+import  {authRoutes,sessionRoutes}  from "./routes/index.js"
 
 dotenv.config();
 const app = express();
@@ -26,7 +26,7 @@ connectDB()
 
 //routes
 app.use("/api/auth" ,authRoutes)
-// app.use("/api/session" ,sessionRoutes)
+app.use("/api/session" ,sessionRoutes)
 // app.use("/api/question" ,questionRoutes)
 
 // app.use("/api/ai/generate-questions" ,protect, generateInterviewQuestions)

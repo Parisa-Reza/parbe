@@ -19,10 +19,10 @@ const SessionSchema = new mongoose.Schema(
       required: true,
     },
     description: String,
-    questions: {
+    questions: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Question",
-    },
+    }],
   },
   {
     timestamps: true,
