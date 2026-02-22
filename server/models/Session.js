@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const SessionSchema = new mongoose.Schema(
   {
@@ -19,14 +19,16 @@ const SessionSchema = new mongoose.Schema(
       required: true,
     },
     description: String,
-    questions: {
+    questions: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: "Question",
-    },
+    }],
   },
   {
     timestamps: true,
-  },
+  }
 );
 
-module.exports = mongoose.Model("Session", SessionSchema);
+const Session = mongoose.model("Session", SessionSchema);
+
+export default Session;
