@@ -8,7 +8,7 @@ const QuestionSchema = new mongoose.Schema(
     },
     question: String,
     answer: String,
-    notes: String,
+    note: String,
     isPinned: {
       type: Boolean,
       default: false,
