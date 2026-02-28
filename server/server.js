@@ -4,9 +4,11 @@ import cors from "cors";
 
 import path from "path";
 import { fileURLToPath } from "url";
+import  {protect} from  "./middlewares/index.js"
 
 import connectDB from "./config/db.js";
 import  {authRoutes,sessionRoutes,questionRoutes}  from "./routes/index.js"
+import {generateInterviewQuestions,generateConceptExplanations} from "./controllers/index.js"
 
 dotenv.config();
 const app = express();
@@ -29,8 +31,8 @@ app.use("/api/auth" ,authRoutes)
 app.use("/api/session" ,sessionRoutes)
 app.use("/api/question" ,questionRoutes)
 
-// app.use("/api/ai/generate-questions" ,protect, generateInterviewQuestions)
-// app.use("/api/ai/generate-explanation" ,protect, generateConceptExplanations)
+app.use("/api/ai/generate-questions" ,protect, generateInterviewQuestions)
+app.use("/api/ai/generate-explanation" ,protect, generateConceptExplanations)
 
 // server uploads folder
 
