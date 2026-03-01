@@ -1,18 +1,17 @@
-import { useState } from "react";
-import {useNavigate} from "react-router-dom"
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { API_PATHS, axiosInstance, validateEmail } from "../../utils";
-import { Input } from "../../components/Input/Input";
-import { useContext } from "react";
-import { UserContext } from "../../context/userContext";
+import { Input } from "../../components";
+import { UserContext } from "../../context";
 
-export const Login = ({ setCurrentPage }) => {
+const Login = ({ setCurrentPage }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const {updateUser}= useContext(UserContext)
+  const { updateUser } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault(); //stops the form’s default behavior of reloading the page and resetting state.
@@ -29,10 +28,8 @@ export const Login = ({ setCurrentPage }) => {
 
     setError("");
 
-
-    
-   // Login API Call
-    try{
+    // Login API Call
+    try {
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
         email,
         password,
@@ -40,17 +37,15 @@ export const Login = ({ setCurrentPage }) => {
 
       const { token } = response.data;
 
-      if(token){
+      if (token) {
         localStorage.setItem("token", token); // Store the token in localStorage for future authenticated requests.
-        updateUser(response.data) // here we update the user context with the response data, which includes user information and the token. This allows the rest of the application to access the user's authenticated state and details.
+        updateUser(response.data); // here we update the user context with the response data, which includes user information and the token. This allows the rest of the application to access the user's authenticated state and details.
         navigate("/dashboard");
       }
-
-    } catch (error){
-      if(error.response && error.response.data.message){
+    } catch (error) {
+      if (error.response && error.response.data.message) {
         setError(error.response.data.message);
-      } 
-      else{
+      } else {
         setError("Something went wrong. Please try again.");
       }
     }
@@ -100,3 +95,5 @@ export const Login = ({ setCurrentPage }) => {
     </div>
   );
 };
+
+export default Login;

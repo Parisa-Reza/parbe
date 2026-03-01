@@ -1,5 +1,5 @@
-export * from './landingPage.jsx';
-export * from './auth/Login.jsx';
-export * from './auth/SignUp.jsx';
-export * from './home/dashboard.jsx';
-export * from './interview/interviewPrep.jsx';
+export { default as LandingPage } from './landingPage';
+export { default as Login } from './auth/Login.jsx';
+export { default as SignUp } from './auth/SignUp.jsx';
+export { default as Dashboard } from './home/dashboard.jsx';
+export { default as InterviewPrep } from './interview/interviewPrep.jsx';

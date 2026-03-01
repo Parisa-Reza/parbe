@@ -1,20 +1,18 @@
-import  { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_PATHS, axiosInstance, validateEmail } from "../../utils";
-import { Input } from "../../components/Input/Input";
-import { UserContext } from "../../context/userContext";
+import { Input } from "../../components";
+import { UserContext } from "../../context";
 
-
-
-export const SignUp = ({ setCurrentPage }) => {
+const SignUp = ({ setCurrentPage }) => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState(null);
 
-   const {updateUser}= useContext(UserContext);
-   const navigate = useNavigate();
+  const { updateUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -35,11 +33,9 @@ export const SignUp = ({ setCurrentPage }) => {
     }
 
     setError("");
-  
 
-
-    try{
-       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
         name: fullName,
         email,
         password,
@@ -47,26 +43,25 @@ export const SignUp = ({ setCurrentPage }) => {
 
       const { token } = response.data;
 
-      if(token) {
+      if (token) {
         localStorage.setItem("token", token);
         updateUser(response.data);
         navigate("/dashboard");
       }
-
-    } catch (error){
-      if(error.response && error.response.data.message){
+    } catch (error) {
+      if (error.response && error.response.data.message) {
         setError(error.response.data.message);
-      } 
-      else{
+      } else {
         setError("Something went wrong. Please try again.");
       }
     }
-
   };
 
   return (
     <div className="w-[90vw] md:w-[33vw] p-7 flex flex-col justify-center">
-      <h3 className="text-lg font-semibold text-[#670D2F]">Create an Account</h3>
+      <h3 className="text-lg font-semibold text-[#670D2F]">
+        Create an Account
+      </h3>
 
       <form onSubmit={handleSignUp}>
         <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
@@ -116,3 +111,5 @@ export const SignUp = ({ setCurrentPage }) => {
     </div>
   );
 };
+
+export default SignUp;

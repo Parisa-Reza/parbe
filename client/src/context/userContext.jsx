@@ -1,53 +1,52 @@
-import { createContext, useState , useEffect} from "react";
+import { createContext, useState, useEffect } from "react";
 import { axiosInstance, API_PATHS } from "../utils";
 
+const UserContext = createContext();
 
-export const UserContext = createContext();
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-export const UserProvider = ({children})=>{
+  const [loading, setLoading] = useState(true);
 
-    const [user,setUser]= useState(null)
+  useEffect(() => {
+    if (user) return;
 
-     const [loading,setLoading]= useState(true)
-     
-     useEffect(()=>{
-        if(user) return;
+    const accessToken = localStorage.getItem("token");
+    if (!accessToken) {
+      setLoading(false);
+      return;
+    }
 
-        const accessToken =localStorage.getItem("token")
-        if(!accessToken){
-            setLoading(false);
-            return
-        }
+    const fetchUser = async () => {
+      try {
+        const response = await axiosInstance.get(API_PATHS.GET_PROFILE);
+        setUser(response.data);
+      } catch (error) {
+        console.error("User not authenticated", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-        const fetchUser = async()=> {
-            try{
-             const response = await axiosInstance.get(API_PATHS.GET_PROFILE)
-            setUser(response.data)
-            }catch(error){
-             console.error("User not authenticated", error);
-            }
-            finally{
-                setLoading(false);
-            }
-        }
+    fetchUser();
+  }, []);
 
-        fetchUser();
-     },[])
+  const updateUser = (userData) => {
+    setUser(userData);
+    localStorage.setItem("token", userData.token);
+    setLoading(false);
+  };
 
-     const updateUser =(userData)=>{
-        setUser(userData)
-        localStorage.setItem("token", userData.token)
-          setLoading(false);
-     }
+  const clearUser = () => {
+    setUser(null);
+    localStorage.removeItem("token");
+  };
 
-     const clearUser= ()=>{
-        setUser(null)
-        localStorage.removeItem("token")
-     }
+  return (
+    <UserContext.Provider value={{ user, loading, updateUser, clearUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
 
-    return (
-        <UserContext.Provider value ={{user,loading, updateUser, clearUser}}>
-            {children}
-        </UserContext.Provider>
-    )
-}
+export default UserContext;

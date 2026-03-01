@@ -1,5 +1,7 @@
-export const InterviewPrep = () => {
+const InterviewPrep = () => {
   return (
     <div>interviewPrep</div>
   )
 }
+
+export default InterviewPrep

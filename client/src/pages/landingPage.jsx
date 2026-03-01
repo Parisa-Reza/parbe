@@ -1,16 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState, useContext } from "react";
-import { FaGithub } from "react-icons/fa";
 
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../context";
 import { APP_FEATURES } from "../utils";
 import AI_vs_Human from "../assets/AI_vs_Human.webp";
-import ProfileInfoCard from "../components/Cards/ProfileInfoCard";
-
 import { Login, SignUp } from "./auth";
-import { Modal } from "../components/Modal";
+import { GithubRepo, Modal, ProfileInfoCard } from "../components";
 
-export const LandingPage = () => {
+const LandingPage = () => {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [openAuthModal, setOpenAuthModal] = useState(false);
@@ -31,33 +28,28 @@ export const LandingPage = () => {
 
         <div className="w-9/10 container mx-auto px-4 pt-6 pb-[200px] relative z-10">
           {/* Headers */}
-     <header className="flex justify-between items-center mb-16">
-  <div className="text-2xl text-[#670D2F] font-semibold">Parbe</div>
+          <header className="flex justify-between items-center mb-16">
+            <div className="text-2xl text-[#670D2F] font-semibold">
+              <Link to="/">Parbe</Link>
+            </div>
 
-  <div className="flex items-center gap-4">
-    {/* GitHub Icon */}
-    <a
-      href="https://github.com/Parisa-Reza/parbe" // your GitHub link
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-[#670D2F] hover:text-black transition-colors text-2xl"
-    >
-      <FaGithub />
-    </a>
-
-    {/* Profile / Login Button */}
-    {user ? (
-      <ProfileInfoCard />
-    ) : (
-      <button
-        className="bg-linear-to-r from-[#7D1C4A] to-[#670D2F] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white border border-white transition-colors cursor-pointer"
-        onClick={() => setOpenAuthModal(true)}
-      >
-        Login / Sign Up
-      </button>
-    )}
-  </div>
-</header>
+            <div className="flex items-center gap-4">
+              {/* Profile / Login Button */}
+              {user ? (
+                <ProfileInfoCard />
+              ) : (
+                <div className="flex items-center gap-6">
+                  <GithubRepo />
+                  <button
+                    className="bg-linear-to-r from-[#7D1C4A] to-[#670D2F] text-sm font-semibold text-white px-7 py-2.5 rounded-full hover:bg-black hover:text-white border border-white transition-colors cursor-pointer"
+                    onClick={() => setOpenAuthModal(true)}
+                  >
+                    Login / Sign Up
+                  </button>
+                </div>
+              )}
+            </div>
+          </header>
 
           {/* Hero Content */}
           <div className="flex flex-col md:flex-row items-center">
@@ -65,7 +57,7 @@ export const LandingPage = () => {
               <h1 className="text-5xl text-black font-medium mb-6 leading-tight">
                 Its "You with AI" <br />
                 <span className="text-transparent bg-clip-text bg-[radial-gradient(circle,_#7D1C4A_0%,_#670D2F_100%)] bg-[length:200%_200%] animate-text-shine font-semibold">
-                  Not 
+                  Not
                 </span>{" "}
                 "You vs AI"
               </h1>
@@ -73,8 +65,10 @@ export const LandingPage = () => {
 
             <div className="w-full md:w-1/2">
               <p className="text-[17px] text-gray-900 mr-0 md:mr-20 mb-6">
-                Wanna crack your next interview?
-                Get  role-specific questions, explore detailed answers, and deepen your understanding of key concepts. From preparation to mastery, your ultimate interview guide is here to support every step of your journey.
+                Wanna crack your next interview? Get role-specific questions,
+                explore detailed answers, and deepen your understanding of key
+                concepts. From preparation to mastery, your ultimate interview
+                guide is here to support every step of your journey.
               </p>
 
               <button
@@ -164,3 +158,5 @@ export const LandingPage = () => {
     </>
   );
 };
+
+export default LandingPage;
