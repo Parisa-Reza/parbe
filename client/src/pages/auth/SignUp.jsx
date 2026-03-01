@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import { validateEmail } from "../../utils";
+import  { useState,useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { API_PATHS, axiosInstance, validateEmail } from "../../utils";
 import { Input } from "../../components/Input/Input";
+import { UserContext } from "../../context/userContext";
 
 
 
@@ -10,6 +12,9 @@ export const SignUp = ({ setCurrentPage }) => {
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState(null);
+
+   const {updateUser}= useContext(UserContext);
+   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -30,6 +35,33 @@ export const SignUp = ({ setCurrentPage }) => {
     }
 
     setError("");
+  
+
+
+    try{
+       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+        name: fullName,
+        email,
+        password,
+      });
+
+      const { token } = response.data;
+
+      if(token) {
+        localStorage.setItem("token", token);
+        updateUser(response.data);
+        navigate("/dashboard");
+      }
+
+    } catch (error){
+      if(error.response && error.response.data.message){
+        setError(error.response.data.message);
+      } 
+      else{
+        setError("Something went wrong. Please try again.");
+      }
+    }
+
   };
 
   return (
@@ -42,7 +74,7 @@ export const SignUp = ({ setCurrentPage }) => {
             value={fullName}
             onChange={({ target }) => setFullName(target.value)}
             label="Full Name"
-            placeholder="Osman Hadi"
+            placeholder="Hadi"
             type="text"
           />
 
@@ -50,7 +82,7 @@ export const SignUp = ({ setCurrentPage }) => {
             value={email}
             onChange={({ target }) => setEmail(target.value)}
             label="Email Address"
-            placeholder="osmanhadi08@gmail.com"
+            placeholder="hadi08@gmail.com"
             type="text"
           />
 
