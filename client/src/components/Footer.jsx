@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className="flex justify-center items-center gap-2 p-3 text-sm bg-gradient-to-r from-[#F08090] to-[#FFC9A1]">
       <div className="flex flex-col items-center gap-4">
         <div>
-          <p>Reminder : Consistency {`>`} Talent</p>
+          <p>Gentle Reminder : Consistency {`>`} Talent</p>
         </div>
 
         <div className="flex item-center gap-4">
