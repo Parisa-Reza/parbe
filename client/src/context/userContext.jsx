@@ -11,6 +11,14 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     if (user) return;
 
+    // Only fetch user on protected routes
+    const unprotectedRoutes = ["/", "/login", "/signup"];
+    const currentPath = window.location.pathname;
+    if (unprotectedRoutes.includes(currentPath)) {
+      setLoading(false);
+      return;
+    }
+
     const accessToken = localStorage.getItem("token");
     if (!accessToken) {
       setLoading(false);
