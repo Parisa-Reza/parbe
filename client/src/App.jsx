@@ -1,6 +1,7 @@
 import { UserProvider } from "./context/userContext";
 import { AppRouter } from "./router";
 import { Toaster } from "react-hot-toast";
+import Footer from "./components/Footer";
 
 export const App = () => {
   return (
@@ -17,6 +18,7 @@ export const App = () => {
             }}
           />
         </div>
+        <Footer />
       </>
     </UserProvider>
   );
