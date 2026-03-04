@@ -1,7 +1,6 @@
 # Parbe 
 
-**Parbe** is a full‑stack **MERN + AI** learning accelerator application designed to help users learn faster and smarter using AI.  
-It provides an intelligent learning experience by combining modern web technologies with AI‑driven features.
+**Parbe** is a full‑stack **MERN + AI** learning accelerator application designed to help users learn faster and smarter using AI. It provides an intelligent learning experience by combining modern web technologies with AI‑driven features.
 
 ## Video Demo: 
 >
