@@ -14,14 +14,14 @@ const Footer = () => {
         <div className="flex item-center gap-4">
           <span>Parisa Reza © {currentYear}</span>
           <a
-            href="https://www.linkedin.com/in/your-linkedin"
+            href="https://www.linkedin.com/in/parisa-reza/"
             target="_blank"
             rel="noopener noreferrer"
           >
             <FaLinkedin size={18} />
           </a>
           <a
-            href="https://github.com/your-github"
+            href="https://github.com/Parisa-Reza"
             target="_blank"
             rel="noopener noreferrer"
           >
