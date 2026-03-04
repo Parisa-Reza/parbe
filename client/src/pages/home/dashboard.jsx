@@ -12,7 +12,6 @@ import {UserContext} from "../../context";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  // const { user, loading } = useContext(require("../../context").default);
   const { user, loading } = useContext(UserContext);
 
   const [openCreateModal, setOpenCreateModal] = useState(false);

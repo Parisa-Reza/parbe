@@ -39,11 +39,19 @@ export const UserProvider = ({ children }) => {
     fetchUser();
   }, []);
 
+
   const updateUser = (userData) => {
-    setUser(userData);
-    localStorage.setItem("token", userData.token);
-    setLoading(false);
-  };
+  setUser({
+    _id: userData._id,
+    name: userData.name,
+    email: userData.email,
+  });
+
+  localStorage.setItem("token", userData.accessToken);
+  localStorage.setItem("refreshToken", userData.refreshToken);
+
+  setLoading(false);
+};
 
   const clearUser = () => {
     setUser(null);
