@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import moment from "moment";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import { LuPlus } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 
@@ -8,9 +8,11 @@ import { API_PATHS, axiosInstance, CARD_BG } from "../../utils";
 import { SummaryCard, DashboardLayout, Modal } from "../../components";
 import CreateSessionForm from "./CreateSessionForm";
 import DeleteAlertContent from "../../components/DeleteAlertContent";
+import {UserContext} from "../../context";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { user, loading } = useContext(UserContext);
 
   const [openCreateModal, setOpenCreateModal] = useState(false);
   const [sessions, setSessions] = useState([]);
@@ -45,8 +47,12 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    if (!loading && !user) {
+      navigate("/");
+      return;
+    }
     fetchAllSessions();
-  }, []);
+  }, [user, loading]);
 
   return (
     <div className=" bg-[#F7CFD8]">

@@ -9,9 +9,14 @@ import { GithubRepo, Modal, ProfileInfoCard } from "../components";
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");
+  // Helper to handle login/signup success
+  const handleAuthSuccess = (userData) => {
+    updateUser(userData);
+    setOpenAuthModal(false);
+  };
 
   const handleCTA = () => {
     if (!user) {
@@ -55,11 +60,11 @@ const LandingPage = () => {
           <div className="flex flex-col md:flex-row items-center">
             <div className="w-full md:w-1/2 pr-4 mb-8 md:mb-0">
               <h1 className="text-5xl text-black font-medium mb-6 leading-tight">
-                Its "You with AI" <br />
+                Its "Human with AI" <br />
                 <span className="text-transparent bg-clip-text bg-[radial-gradient(circle,_#7D1C4A_0%,_#670D2F_100%)] bg-[length:200%_200%] animate-text-shine font-semibold">
                   Not
                 </span>{" "}
-                "You vs AI"
+                "Human vs AI"
               </h1>
             </div>
 
@@ -134,7 +139,6 @@ const LandingPage = () => {
             </section>
           </div>
         </div>
-
       </div>
 
       <Modal
@@ -146,9 +150,17 @@ const LandingPage = () => {
         hideHeader
       >
         <div>
-          {currentPage === "login" && <Login setCurrentPage={setCurrentPage} />}
+          {currentPage === "login" && (
+            <Login
+              setCurrentPage={setCurrentPage}
+              onAuthSuccess={handleAuthSuccess}
+            />
+          )}
           {currentPage === "signup" && (
-            <SignUp setCurrentPage={setCurrentPage} />
+            <SignUp
+              setCurrentPage={setCurrentPage}
+              onAuthSuccess={handleAuthSuccess}
+            />
           )}
         </div>
       </Modal>

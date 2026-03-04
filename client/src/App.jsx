@@ -1,12 +1,14 @@
-import { UserProvider } from "./context/userContext";
+ import { UserProvider } from "./context/userContext";
 import { AppRouter } from "./router";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
 
 export const App = () => {
   return (
-    <UserProvider>
+    
       <>
+      <UserProvider>
+
         <div className="w-full min-h-screen bg-[#F7CFD8]">
           <AppRouter />
           <Toaster
@@ -19,7 +21,8 @@ export const App = () => {
           />
         </div>
         <Footer />
+      </UserProvider>
       </>
-    </UserProvider>
+ 
   );
 };

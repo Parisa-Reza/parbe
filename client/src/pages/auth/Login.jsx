@@ -35,13 +35,15 @@ const Login = ({ setCurrentPage }) => {
         password,
       });
 
-      const { token } = response.data;
 
-      if (token) {
-        localStorage.setItem("token", token); // Store the token in localStorage for future authenticated requests.
-        updateUser(response.data); // here we update the user context with the response data, which includes user information and the token. This allows the rest of the application to access the user's authenticated state and details.
+      const { accessToken } = response.data;
+      if (accessToken) {
+        localStorage.setItem("token", accessToken);
+        updateUser(response.data);
         navigate("/dashboard");
       }
+
+
     } catch (error) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);

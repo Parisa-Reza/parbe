@@ -41,10 +41,10 @@ const SignUp = ({ setCurrentPage }) => {
         password,
       });
 
-      const { token } = response.data;
+      const { accessToken } = response.data;
 
-      if (token) {
-        localStorage.setItem("token", token);
+      if (accessToken) {
+        localStorage.setItem("token", accessToken);
         updateUser(response.data);
         navigate("/dashboard");
       }
